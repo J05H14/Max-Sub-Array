@@ -4,23 +4,33 @@ public class Lab03_JoshuaLazaro {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[] arr = {13, -3, -25, 20, -3, -16, -23, 18}; 
-		String result = divAndCon(arr).toString();
+		int[] arr = {13, -3, -25, 20, -3, -16, -23, 18, 20, -7, 12, -5, -22, 15, -4, 7}; 
+		String result = bruteForce(arr).toString();
+		String result2 = divAndCon(arr).toString();
 		
-		System.out.println(result);
+		System.out.println("Brute Force: " + result);
+		System.out.println("Divide and Conquer: " + result2);
 	}
 	
-	public int[] bruteForce(int arr[]){
-		int sum = 0;
+	public static MaxSubArray bruteForce(int arr[]){
+		Integer sum = Integer.MIN_VALUE;
+		int maxSum;
+		int firstIndex = 0;
+		int lastIndex = 0;
 		
-		
-		for(int i = 0; i < arr.length; i++){
-			for(int j = i + 1; j < arr.length - 1; j++){
-				
+		for(int i = 0; i < arr.length - 1; i++){
+			maxSum = 0;
+			for(int j = i; j < arr.length; j++){
+				maxSum += arr[j];
+				if(maxSum > sum){
+					sum = maxSum;
+					firstIndex = i;
+					lastIndex = j;
+				}
 			}
 		}
 		
-		return arr;
+		return new MaxSubArray(firstIndex, lastIndex, sum);
 		
 	}
 	
